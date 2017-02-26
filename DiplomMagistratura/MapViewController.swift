@@ -14,9 +14,17 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    let url = URL(string: "http://www.apple.com")
-    webView.loadRequest(URLRequest(url: url!))
+      
+        //Bundle.main.path(forResource: "MapHTMLCode", ofType: "html")
+        //if let path = Bundle.main.path(forResource: "MapHTMLCode", ofType: "html", inDirectory: "Supports")
+          if let path =  Bundle.main.path(forResource: "MapHTMLCode", ofType: "html") {
+            print("ok")
+            let url = URL(fileURLWithPath: path)
+            webView.loadRequest(URLRequest(url: url))
+          }else{
+            print("not ok")
+        }
+    
 
         // Do any additional setup after loading the view.
     }
