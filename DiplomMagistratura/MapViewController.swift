@@ -11,8 +11,12 @@ import UIKit
 class MapViewController: UIViewController {
 
     @IBOutlet weak var webView: UIWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    let url = URL(string: "http://www.apple.com")
+    webView.loadRequest(URLRequest(url: url!))
 
         // Do any additional setup after loading the view.
     }
