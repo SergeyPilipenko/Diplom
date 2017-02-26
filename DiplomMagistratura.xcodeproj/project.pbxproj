@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		846DF2BA1E63712600F41FD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DF2B91E63712600F41FD6 /* AppDelegate.swift */; };
-		846DF2BC1E63712600F41FD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DF2BB1E63712600F41FD6 /* ViewController.swift */; };
 		846DF2BF1E63712600F41FD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846DF2BD1E63712600F41FD6 /* Main.storyboard */; };
 		846DF2C11E63712600F41FD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 846DF2C01E63712600F41FD6 /* Assets.xcassets */; };
 		846DF2C41E63712600F41FD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846DF2C21E63712600F41FD6 /* LaunchScreen.storyboard */; };
+		846DF2CC1E63755E00F41FD6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DF2CB1E63755E00F41FD6 /* MapViewController.swift */; };
+		846DF2D01E6375C600F41FD6 /* MapHTMLCode.html in Resources */ = {isa = PBXBuildFile; fileRef = 846DF2CF1E6375C600F41FD6 /* MapHTMLCode.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		846DF2B61E63712600F41FD6 /* DiplomMagistratura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiplomMagistratura.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		846DF2B91E63712600F41FD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		846DF2BB1E63712600F41FD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		846DF2BE1E63712600F41FD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		846DF2C01E63712600F41FD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		846DF2C31E63712600F41FD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		846DF2C51E63712600F41FD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		846DF2CB1E63755E00F41FD6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		846DF2CF1E6375C600F41FD6 /* MapHTMLCode.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MapHTMLCode.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,31 @@
 		846DF2B81E63712600F41FD6 /* DiplomMagistratura */ = {
 			isa = PBXGroup;
 			children = (
+				846DF2CE1E6375A200F41FD6 /* Supports */,
+				846DF2CD1E63756500F41FD6 /* Controllers */,
 				846DF2B91E63712600F41FD6 /* AppDelegate.swift */,
-				846DF2BB1E63712600F41FD6 /* ViewController.swift */,
 				846DF2BD1E63712600F41FD6 /* Main.storyboard */,
 				846DF2C01E63712600F41FD6 /* Assets.xcassets */,
 				846DF2C21E63712600F41FD6 /* LaunchScreen.storyboard */,
 				846DF2C51E63712600F41FD6 /* Info.plist */,
 			);
 			path = DiplomMagistratura;
+			sourceTree = "<group>";
+		};
+		846DF2CD1E63756500F41FD6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				846DF2CB1E63755E00F41FD6 /* MapViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		846DF2CE1E6375A200F41FD6 /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				846DF2CF1E6375C600F41FD6 /* MapHTMLCode.html */,
+			);
+			name = Supports;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				846DF2C41E63712600F41FD6 /* LaunchScreen.storyboard in Resources */,
+				846DF2D01E6375C600F41FD6 /* MapHTMLCode.html in Resources */,
 				846DF2C11E63712600F41FD6 /* Assets.xcassets in Resources */,
 				846DF2BF1E63712600F41FD6 /* Main.storyboard in Resources */,
 			);
@@ -137,8 +157,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				846DF2BC1E63712600F41FD6 /* ViewController.swift in Sources */,
 				846DF2BA1E63712600F41FD6 /* AppDelegate.swift in Sources */,
+				846DF2CC1E63755E00F41FD6 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
