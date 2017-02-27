@@ -2,9 +2,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Элементы управления картой. Пример создания карты с использованием API Яндекс.Карт 2.1.</title>
-        <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
         
+        <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
         <style>
             body, html {
                 padding: 0;
@@ -24,13 +23,46 @@
                 // Создание экземпляра карты и его привязка к контейнеру с
                 // заданным id ("map").
                 myMap = new ymaps.Map('map', {
-                                      // При инициализации карты обязательно нужно указать
-                                      // её центр и коэффициент масштабирования.
-                                      center: [56.326944, 44.0075], // Нижний Новгород
-                                      zoom: 12,
-                                      controls: ['zoomControl']
-                                      });
-                                      
+                // При инициализации карты обязательно нужно указать
+                // её центр и коэффициент масштабирования.
+                    center: [56.326944, 44.0075], // Нижний Новгород
+                    zoom: 12,
+                    controls: []
+                });
+                
+                var zoomControl = new ymaps.control.ZoomControl({
+                    options: {
+                                position: {
+                                            top: document.body.clientHeight/2-25,
+                                            bottom: 'auto',
+                                            right: 10,
+                                            left: 'auto'
+                                        },
+                                size: 'small'
+                        
+                        }
+                });
+                myMap.controls.add(zoomControl);
+                
+                // Создадим элемент управления "Пробки".
+                var trafficControl = new ymaps.control.TrafficControl({
+                                                                     
+                                                                      options: {
+                                                                      float: 'left',
+                                                                      size: 'small'
+                                                                      },
+                                                                      
+                                                                      state: {
+                                                                      // Отображаются пробки "Сейчас".
+                                                                      providerKey: 'traffic#actual',
+                                                                      // Начинаем сразу показывать пробки на карте.
+                                                                      trafficShown: false
+                                                                                                                                           }});
+                                                                      // Добавим контрол на карту.
+                                                                      myMap.controls.add(trafficControl);
+                                                                      // Получим ссылку на провайдер пробок "Сейчас" и включим показ инфоточек.
+                                                                  // trafficControl.getProvider('traffic#actual').state.set('infoLayerShown', true);
+                
             }
         </script>
     </head>
