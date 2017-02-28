@@ -23,16 +23,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VK8-4S-snG">
-                                <rect key="frame" x="16" y="20" width="343" height="598"/>
+                                <rect key="frame" x="16" y="64" width="343" height="554"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="8rf-WR-8bb">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="VK8-4S-snG" secondAttribute="bottom" id="Bh7-an-2CW"/>
+                            <constraint firstItem="VK8-4S-snG" firstAttribute="top" secondItem="8rf-WR-8bb" secondAttribute="bottom" id="82n-JK-C4l"/>
+                            <constraint firstItem="VK8-4S-snG" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Bh7-an-2CW"/>
+                            <constraint firstItem="8rf-WR-8bb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="WsB-qw-vk0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VK8-4S-snG" secondAttribute="trailing" id="Y6I-y9-mzB"/>
+                            <constraint firstAttribute="trailing" secondItem="8rf-WR-8bb" secondAttribute="trailing" id="eNc-a1-XxR"/>
                             <constraint firstItem="VK8-4S-snG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="kow-BB-SA9"/>
-                            <constraint firstItem="VK8-4S-snG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="zzC-Mr-0L6"/>
+                            <constraint firstItem="8rf-WR-8bb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uD2-7a-5Y5"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" id="Kdx-kG-oCZ"/>
@@ -50,6 +57,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="IbY-mr-PrS" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="dsT-oJ-GtV">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
