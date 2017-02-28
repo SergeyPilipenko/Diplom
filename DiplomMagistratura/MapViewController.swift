@@ -10,18 +10,11 @@ import UIKit
 
 class MapViewController: UIViewController {
 
+    // MARK: - IBOUtlets
     @IBOutlet weak var webView: UIWebView!
-    
-    let data = ["Spartak", "Proletka", "CinemaPark"]
-    
-    var views = [UIView]()
-    var animator: UIDynamicAnimator!
-    var gravity: UIGravityBehavior!
-    var snap: UISnapBehavior!
-    var previousTouchPoint: CGPoint!
-    var viewDragging = false
-    var viewPinned = false
-    
+
+   
+    // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
       
@@ -35,42 +28,13 @@ class MapViewController: UIViewController {
             print("not ok")
         }
         
-        animator = UIDynamicAnimator(referenceView: self.view)
-        gravity = UIGravityBehavior()
         
-        animator.addBehavior(gravity)
-        gravity.magnitude = 4
-    
 
         // Do any additional setup after loading the view.
     }
 
-    
-    
-    func addChildViewController(atOffset offset: CGFloat, dataForVC data: AnyObject?) ->UIView? {
-        let frameForView = self.view.bounds.offsetBy(dx: 0, dy: self.view.bounds.size.height - offset)
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let cinemaVC = sb.instantiateViewController(withIdentifier: "cinemaVC")
-        if let view = cinemaVC.view{
-            view.frame = frameForView
-            
-            if let headingStr = data as? String{
-                cinemaVC.headerString = headingStr
-            }
-            
-            self.addChildViewController(cinemaVC)
-            self.view.addSubview(view)
-            cinemaVC.didMove(toParentViewController: self)
-        }
-        
-    }
-    
-    
-    
-    
-    
-    
-    
+
+
     
     
     
