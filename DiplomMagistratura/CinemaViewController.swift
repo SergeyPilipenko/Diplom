@@ -16,15 +16,12 @@ class CinemaViewController: UIViewController {
     
     //MARK: - Variables
     
-    var headerString: String? {
-        didSet{
-            configureView()
-        }
-    }
-    
+    var headerString: String?
+   
     //MARK: - Functions
     
     func configureView() {
+        
         headerlabel.text = headerString
     }
     
@@ -40,6 +37,10 @@ class CinemaViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
+        configureView()
+    }
 
     /*
     // MARK: - Navigation

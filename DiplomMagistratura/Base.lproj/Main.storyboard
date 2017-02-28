@@ -6,11 +6,10 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map-->
+        <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="DiplomMagistratura" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,39 +21,83 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VK8-4S-snG">
-                                <rect key="frame" x="16" y="64" width="343" height="554"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Введите Название кинотеатра" translatesAutoresizingMaskIntoConstraints="NO" id="8rf-WR-8bb">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Введите название кинотеатра" translatesAutoresizingMaskIntoConstraints="NO" id="8rf-WR-8bb">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uMV-2V-iaf">
+                                <rect key="frame" x="0.0" y="568" width="375" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="vrg-Tm-veL"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="KW4-8t-80n">
+                                    <size key="itemSize" width="150" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="WwB-TO-lYx" customClass="CustomCollectionViewCell" customModule="DiplomMagistratura" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMM-by-9oc">
+                                                    <rect key="frame" x="43" y="15" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="0.77531329922347769" blue="0.64761993903563742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="label" destination="VMM-by-9oc" id="sli-V1-BDw"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="wS2-vy-aCq"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="G7m-TZ-CzC"/>
+                                </connections>
+                            </collectionView>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gJ-Wd-vDE">
+                                <rect key="frame" x="0.0" y="64" width="375" height="504"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="VK8-4S-snG" firstAttribute="top" secondItem="8rf-WR-8bb" secondAttribute="bottom" id="82n-JK-C4l"/>
-                            <constraint firstItem="VK8-4S-snG" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Bh7-an-2CW"/>
+                            <constraint firstAttribute="trailing" secondItem="uMV-2V-iaf" secondAttribute="trailing" id="7Pb-L4-8o2"/>
+                            <constraint firstAttribute="trailing" secondItem="1gJ-Wd-vDE" secondAttribute="trailing" id="8W7-ES-rNl"/>
+                            <constraint firstItem="1gJ-Wd-vDE" firstAttribute="top" secondItem="8rf-WR-8bb" secondAttribute="bottom" id="CuN-OR-epN"/>
+                            <constraint firstItem="1gJ-Wd-vDE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="NZk-b8-p4v"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uMV-2V-iaf" secondAttribute="bottom" id="Nms-3d-1Vb"/>
                             <constraint firstItem="8rf-WR-8bb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="WsB-qw-vk0"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="VK8-4S-snG" secondAttribute="trailing" id="Y6I-y9-mzB"/>
+                            <constraint firstItem="uMV-2V-iaf" firstAttribute="top" secondItem="1gJ-Wd-vDE" secondAttribute="bottom" id="bMy-BG-TVo"/>
                             <constraint firstAttribute="trailing" secondItem="8rf-WR-8bb" secondAttribute="trailing" id="eNc-a1-XxR"/>
-                            <constraint firstItem="VK8-4S-snG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="kow-BB-SA9"/>
+                            <constraint firstItem="uMV-2V-iaf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gv7-ss-YRH"/>
                             <constraint firstItem="8rf-WR-8bb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uD2-7a-5Y5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="Kdx-kG-oCZ"/>
+                    <navigationItem key="navigationItem" id="IDZ-BD-JxJ"/>
                     <connections>
-                        <outlet property="webView" destination="VK8-4S-snG" id="rwk-Fd-5jK"/>
+                        <outlet property="collectionView" destination="uMV-2V-iaf" id="fPd-Ua-yTf"/>
+                        <outlet property="webView" destination="1gJ-Wd-vDE" id="226-Bd-8fA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1056.8" y="123.68815592203899"/>
+            <point key="canvasLocation" x="1996" y="123.68815592203899"/>
         </scene>
         <!--Cinema View Controller-->
         <scene sceneID="rTb-pN-0tX">
             <objects>
-                <viewController storyboardIdentifier="CinemaVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qYy-ey-YWo" customClass="CinemaViewController" customModule="DiplomMagistratura" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cinemaVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qYy-ey-YWo" customClass="CinemaViewController" customModule="DiplomMagistratura" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lmL-mJ-1DU"/>
                         <viewControllerLayoutGuide type="bottom" id="8b1-XB-OzQ"/>
@@ -64,7 +107,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSw-Sp-kZq">
-                                <rect key="frame" x="139" y="20" width="98" height="36"/>
+                                <rect key="frame" x="138.5" y="315.5" width="98" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -72,17 +115,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="XSw-Sp-kZq" firstAttribute="centerX" secondItem="xnl-Y3-tkT" secondAttribute="centerX" id="3ry-le-l0i"/>
-                            <constraint firstItem="XSw-Sp-kZq" firstAttribute="top" secondItem="lmL-mJ-1DU" secondAttribute="bottom" id="WY8-y7-2SZ"/>
+                            <constraint firstItem="XSw-Sp-kZq" firstAttribute="centerY" secondItem="xnl-Y3-tkT" secondAttribute="centerY" id="31Q-vB-Bho"/>
+                            <constraint firstItem="XSw-Sp-kZq" firstAttribute="centerX" secondItem="xnl-Y3-tkT" secondAttribute="centerX" id="a3t-Yr-VVw"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Wnh-Nm-8nZ"/>
                     <connections>
                         <outlet property="headerlabel" destination="XSw-Sp-kZq" id="8dW-L5-tB2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xV-Ix-ksx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1756" y="123.68815592203899"/>
+            <point key="canvasLocation" x="2719.1999999999998" y="133.5832083958021"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ZVd-Vm-swH">
@@ -95,12 +139,31 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="gXx-x1-Nrq"/>
+                        <segue destination="jtW-CM-VT5" kind="relationship" relationship="viewControllers" id="gXx-x1-Nrq"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Mc-1L-krn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="bVi-hX-wXx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jtW-CM-VT5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" id="Kdx-kG-oCZ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r4I-zv-bbB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QCn-SH-jCo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wOv-Ne-tBx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1056.8" y="123.68815592203899"/>
         </scene>
     </scenes>
 </document>

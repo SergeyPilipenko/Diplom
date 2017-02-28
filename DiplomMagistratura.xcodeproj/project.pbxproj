@@ -14,6 +14,8 @@
 		846DF2CC1E63755E00F41FD6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DF2CB1E63755E00F41FD6 /* MapViewController.swift */; };
 		846DF2D01E6375C600F41FD6 /* MapHTMLCode.html in Resources */ = {isa = PBXBuildFile; fileRef = 846DF2CF1E6375C600F41FD6 /* MapHTMLCode.html */; };
 		84A1E7DE1E65A3A400DBFCF8 /* CinemaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1E7DD1E65A3A400DBFCF8 /* CinemaViewController.swift */; };
+		84A1E7E11E65BC2E00DBFCF8 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1E7E01E65BC2E00DBFCF8 /* CustomCollectionViewCell.swift */; };
+		84A1E7E31E65DC5100DBFCF8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A1E7E21E65DC5100DBFCF8 /* MapKit.framework */; };
 		B67C2DF1DAB68CF1EE395530 /* Pods_DiplomMagistratura.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06D98807CA39D1B87CB63699 /* Pods_DiplomMagistratura.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +32,8 @@
 		846DF2CB1E63755E00F41FD6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		846DF2CF1E6375C600F41FD6 /* MapHTMLCode.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MapHTMLCode.html; sourceTree = "<group>"; };
 		84A1E7DD1E65A3A400DBFCF8 /* CinemaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CinemaViewController.swift; sourceTree = "<group>"; };
+		84A1E7E01E65BC2E00DBFCF8 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		84A1E7E21E65DC5100DBFCF8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84A1E7E31E65DC5100DBFCF8 /* MapKit.framework in Frameworks */,
 				B67C2DF1DAB68CF1EE395530 /* Pods_DiplomMagistratura.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,6 +79,7 @@
 		846DF2B81E63712600F41FD6 /* DiplomMagistratura */ = {
 			isa = PBXGroup;
 			children = (
+				84A1E7DF1E65BC1100DBFCF8 /* View */,
 				846DF2CE1E6375A200F41FD6 /* Supports */,
 				846DF2CD1E63756500F41FD6 /* Controllers */,
 				846DF2B91E63712600F41FD6 /* AppDelegate.swift */,
@@ -102,9 +108,18 @@
 			name = Supports;
 			sourceTree = "<group>";
 		};
+		84A1E7DF1E65BC1100DBFCF8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84A1E7E01E65BC2E00DBFCF8 /* CustomCollectionViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		DE75DED89C939F416DA2F588 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84A1E7E21E65DC5100DBFCF8 /* MapKit.framework */,
 				06D98807CA39D1B87CB63699 /* Pods_DiplomMagistratura.framework */,
 			);
 			name = Frameworks;
@@ -147,6 +162,14 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = SYR3C2CF5L;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -238,6 +261,7 @@
 				846DF2BA1E63712600F41FD6 /* AppDelegate.swift in Sources */,
 				846DF2CC1E63755E00F41FD6 /* MapViewController.swift in Sources */,
 				84A1E7DE1E65A3A400DBFCF8 /* CinemaViewController.swift in Sources */,
+				84A1E7E11E65BC2E00DBFCF8 /* CustomCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +389,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.SergeyPilipenkp.DiplomMagistratura;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -379,6 +404,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.SergeyPilipenkp.DiplomMagistratura;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
