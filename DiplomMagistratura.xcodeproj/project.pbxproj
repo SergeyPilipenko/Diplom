@@ -13,6 +13,7 @@
 		846DF2C41E63712600F41FD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846DF2C21E63712600F41FD6 /* LaunchScreen.storyboard */; };
 		846DF2CC1E63755E00F41FD6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DF2CB1E63755E00F41FD6 /* MapViewController.swift */; };
 		846DF2D01E6375C600F41FD6 /* MapHTMLCode.html in Resources */ = {isa = PBXBuildFile; fileRef = 846DF2CF1E6375C600F41FD6 /* MapHTMLCode.html */; };
+		84A1E7DE1E65A3A400DBFCF8 /* CinemaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1E7DD1E65A3A400DBFCF8 /* CinemaViewController.swift */; };
 		B67C2DF1DAB68CF1EE395530 /* Pods_DiplomMagistratura.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06D98807CA39D1B87CB63699 /* Pods_DiplomMagistratura.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		846DF2C51E63712600F41FD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		846DF2CB1E63755E00F41FD6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		846DF2CF1E6375C600F41FD6 /* MapHTMLCode.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MapHTMLCode.html; sourceTree = "<group>"; };
+		84A1E7DD1E65A3A400DBFCF8 /* CinemaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CinemaViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				846DF2CB1E63755E00F41FD6 /* MapViewController.swift */,
+				84A1E7DD1E65A3A400DBFCF8 /* CinemaViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			files = (
 				846DF2BA1E63712600F41FD6 /* AppDelegate.swift in Sources */,
 				846DF2CC1E63755E00F41FD6 /* MapViewController.swift in Sources */,
+				84A1E7DE1E65A3A400DBFCF8 /* CinemaViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
