@@ -8,27 +8,42 @@
 
 import UIKit
 
-class CinemaViewController: UIViewController {
+class CinemaViewController: UIViewController, UIScrollViewDelegate {
 
+   
     // MARK: - IBOutlets
-    @IBOutlet weak var headerlabel: UILabel!
+    
+    @IBOutlet weak var webView: UIWebView!
 
+
+   
     
     //MARK: - Variables
     
     var headerString: String?
+    var webViewk: UIWebView {
+        let wv = UIWebView(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.width/2))
+        return wv
+    }
    
     //MARK: - Functions
     
     func configureView() {
         
-        headerlabel.text = headerString
+        
     }
+    
     
     // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+       //webView.frame = webViewk.frame
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        let viewK = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 44))
+        viewK.backgroundColor = UIColor.clear
+        navigationController?.navigationItem.titleView = viewK
+        
         // Do any additional setup after loading the view.
     }
 
@@ -38,11 +53,23 @@ class CinemaViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = false
-        configureView()
+        //navigationController?.setNavigationBarHidden(false, animated: true)
+       // navigationController?.navigationBar.backgroundColor = UIColor.clear
+        //configureView()
+        if let path =  Bundle.main.path(forResource: "MapHTMLCode", ofType: "html") {
+            print("ok")
+            let url = URL(fileURLWithPath: path)
+            webView.loadRequest(URLRequest(url: url))
+        }else{
+            print("not ok")
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    
     }
 
-    /*
+       /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

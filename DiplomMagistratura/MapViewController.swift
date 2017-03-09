@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import RealmSwift
 
-class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     
     let data = ["1", "2", "3", "4"]
@@ -19,11 +20,49 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var collectionView: UICollectionView!
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    
    
     // MARK: - Methods
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
+        let config = Realm.Configuration(
+            // Set the new schema version. This must be greater than the previously used
+            // version (if you've never set a schema version before, the version is 0).
+            schemaVersion: 1,
+            
+            // Set the block which will be called automatically when opening a Realm with
+            // a schema version lower than the one set above
+            migrationBlock: { migration, oldSchemaVersion in
+                // We haven’t migrated anything yet, so oldSchemaVersion == 0
+                if (oldSchemaVersion < 1) {
+                    // Nothing to do!
+                    // Realm will automatically detect new properties and removed properties
+                    // And will update the schema on disk automatically
+                }
+        })
+        
+        // Tell Realm to use this new configuration object for the default Realm
+        Realm.Configuration.defaultConfiguration = config
+        
+        // Now that we've told Realm how to handle the schema change, opening the file
+        // will automatically perform the migration
+        let realm = try! Realm()
+        
+       /* let spartak = Cinema()
+        spartak.name = "Спартак"
+        
+        try! realm.write {
+            realm.add(spartak)
+        }*/
+        
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+       
           if let path =  Bundle.main.path(forResource: "MapHTMLCode", ofType: "html") {
             print("ok")
             let url = URL(fileURLWithPath: path)
@@ -31,6 +70,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
           }else{
             print("not ok")
         }
+        
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         // Do any additional setup after loading the view.
@@ -40,6 +80,9 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         navigationController?.isNavigationBarHidden = true
     }
 
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
         
@@ -62,8 +105,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         selectedIndexPath = indexPath
           let cell = collectionView.cellForItem(at: selectedIndexPath!) as! CustomCollectionViewCell
         let sb = UIStoryboard(name: "Main", bundle: nil)
-         let cinemaVC = sb.instantiateViewController(withIdentifier: "cinemaVC") as! CinemaViewController
-         cinemaVC.headerString = cell.label.text
+         let cinemaVC = sb.instantiateViewController(withIdentifier: "cinemaVC") as! CinemaTableViewController
          navigationController?.pushViewController(cinemaVC, animated: true)
 
        

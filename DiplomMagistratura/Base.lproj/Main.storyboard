@@ -87,6 +87,7 @@
                     <navigationItem key="navigationItem" id="IDZ-BD-JxJ"/>
                     <connections>
                         <outlet property="collectionView" destination="uMV-2V-iaf" id="fPd-Ua-yTf"/>
+                        <outlet property="searchBar" destination="8rf-WR-8bb" id="yUt-Ix-aEm"/>
                         <outlet property="webView" destination="1gJ-Wd-vDE" id="226-Bd-8fA"/>
                     </connections>
                 </viewController>
@@ -94,39 +95,23 @@
             </objects>
             <point key="canvasLocation" x="1996" y="123.68815592203899"/>
         </scene>
-        <!--Cinema View Controller-->
-        <scene sceneID="rTb-pN-0tX">
+        <!--Cinema Table View Controller-->
+        <scene sceneID="xmP-Lg-jHf">
             <objects>
-                <viewController storyboardIdentifier="cinemaVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qYy-ey-YWo" customClass="CinemaViewController" customModule="DiplomMagistratura" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cinemaVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ktQ-bG-Ex3" customClass="CinemaTableViewController" customModule="DiplomMagistratura" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lmL-mJ-1DU"/>
-                        <viewControllerLayoutGuide type="bottom" id="8b1-XB-OzQ"/>
+                        <viewControllerLayoutGuide type="top" id="qqf-9H-Og7"/>
+                        <viewControllerLayoutGuide type="bottom" id="8ya-1E-u82"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="xnl-Y3-tkT">
+                    <view key="view" contentMode="scaleToFill" id="p6C-ZD-SnF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSw-Sp-kZq">
-                                <rect key="frame" x="138.5" y="315.5" width="98" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="XSw-Sp-kZq" firstAttribute="centerY" secondItem="xnl-Y3-tkT" secondAttribute="centerY" id="31Q-vB-Bho"/>
-                            <constraint firstItem="XSw-Sp-kZq" firstAttribute="centerX" secondItem="xnl-Y3-tkT" secondAttribute="centerX" id="a3t-Yr-VVw"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Wnh-Nm-8nZ"/>
-                    <connections>
-                        <outlet property="headerlabel" destination="XSw-Sp-kZq" id="8dW-L5-tB2"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8xV-Ix-ksx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5NP-lH-9Qu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2719.1999999999998" y="133.5832083958021"/>
+            <point key="canvasLocation" x="2776.8000000000002" y="123.68815592203899"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ZVd-Vm-swH">
@@ -152,7 +137,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jtW-CM-VT5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" id="Kdx-kG-oCZ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r4I-zv-bbB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r4I-zv-bbB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
