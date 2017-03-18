@@ -12,8 +12,7 @@ import RealmSwift
 class MapViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     
-    let data = ["1", "2", "3", "4"]
-    var selectedIndexPath: IndexPath?
+    var data: Results<Cinema>!
     //let colors: [UIColor] = [.red, .green, .gray, .darkGray]
     
     // MARK: - IBOUtlets
@@ -31,6 +30,15 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Realm.Configuration.defaultConfiguration.schemaVersion = 1
+       
+
+        
+
+        let realm = try! Realm()
+        data = realm.objects(Cinema.self)
+        print(data.description)
+        
        
           if let path =  Bundle.main.path(forResource: "MapHTMLCode", ofType: "html") {
             print("ok")
@@ -40,14 +48,13 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             print("not ok")
         }
         
+       // print(Realm.Configuration.defaultConfiguration.fileURL)
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         // Do any additional setup after loading the view.
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
-    }
+
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
@@ -59,9 +66,8 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCollectionViewCell
         
-        cell.sizeThatFits(CGSize(width: collectionView.frame.width, height: collectionView.frame.height))
-        cell.label.text = data[indexPath.row]
-        //cell.backgroundColor = colors[indexPath.row]
+        let cinema: Cinema = data[indexPath.row]
+        cell.label.text = cinema.name
         
         return cell
     }
@@ -71,10 +77,10 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        selectedIndexPath = indexPath
-          let cell = collectionView.cellForItem(at: selectedIndexPath!) as! CustomCollectionViewCell
+        let cinema = data[indexPath.row]
         let sb = UIStoryboard(name: "Main", bundle: nil)
          let cinemaVC = sb.instantiateViewController(withIdentifier: "cinemaVC") as! CinemaTableViewController
+        cinemaVC.cinema = cinema
          navigationController?.pushViewController(cinemaVC, animated: true)
 
        

@@ -29,6 +29,7 @@
 		06D98807CA39D1B87CB63699 /* Pods_DiplomMagistratura.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DiplomMagistratura.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1610FE5047AB6A75E7C475CC /* Pods-DiplomMagistratura.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiplomMagistratura.release.xcconfig"; path = "Pods/Target Support Files/Pods-DiplomMagistratura/Pods-DiplomMagistratura.release.xcconfig"; sourceTree = "<group>"; };
 		2A6DF17BB3CB8C5F154EBAB9 /* Pods-DiplomMagistratura.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiplomMagistratura.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DiplomMagistratura/Pods-DiplomMagistratura.debug.xcconfig"; sourceTree = "<group>"; };
+		840F5BAF1E76024400AB7A2A /* base.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = base.realm; sourceTree = "<group>"; };
 		8417769B1E6B35C400AE6997 /* StretchHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StretchHeader.swift; sourceTree = "<group>"; };
 		8417769C1E6B35C400AE6997 /* StretchHeaderOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StretchHeaderOptions.swift; sourceTree = "<group>"; };
 		8417769F1E6B654A00AE6997 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
@@ -136,6 +137,7 @@
 		84BACF9E1E71A89B00A59734 /* RealmDatabase */ = {
 			isa = PBXGroup;
 			children = (
+				840F5BAF1E76024400AB7A2A /* base.realm */,
 				84BACF9F1E71A8BF00A59734 /* Cinema.swift */,
 				84BACFA11E71AFB800A59734 /* City.swift */,
 			);

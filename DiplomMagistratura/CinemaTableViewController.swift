@@ -7,14 +7,14 @@
 //
 
 import UIKit
-
+import Alamofire
 
 
 import UIKit
 
 class CinemaTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    
+    var cinema: Cinema?
     var header : StretchHeader!
     var tableView : UITableView!
     var navigationView = UIView()
@@ -57,7 +57,7 @@ class CinemaTableViewController: UIViewController, UITableViewDataSource, UITabl
         // I will add this (navigationbar titlelabel)
         let label = UILabel()
         label.frame = CGRect(x: 0, y: statusbarHeight, width: view.frame.size.width, height: navibarHeight)
-        label.text = "navigation title";
+        label.text = cinema?.name
         label.textAlignment = .center
         label.textColor = UIColor.green
         navigationView.addSubview(label)
@@ -69,6 +69,8 @@ class CinemaTableViewController: UIViewController, UITableViewDataSource, UITabl
         backButton.tintColor = UIColor.green
         backButton.addTarget(self, action: #selector(CinemaTableViewController.leftButtonAction), for: .touchUpInside)
         view.addSubview(backButton)
+        
+        
     }
     
     func setupHeaderView() {
@@ -84,15 +86,14 @@ class CinemaTableViewController: UIViewController, UITableViewDataSource, UITabl
         header.backgroundColor = UIColor.white
         let webView = UIWebView()
         webView.frame = header.conteinerView.frame
-        if let path =  Bundle.main.path(forResource: "MapHTMLCode", ofType: "html") {
-            print("ok")
-            let url = URL(fileURLWithPath: path)
-            webView.loadRequest(URLRequest(url: url))
-        }else{
-            print("not ok")
-        }
+        webView.isUserInteractionEnabled = false
+        
+        
+        let url = URL(string: "https://static-maps.yandex.ru/1.x/?l=map&ll=39.204365,51.661937&z=16&size=320,160&pt=39.204365,51.661937,pm2dgm")!
+        let request = URLRequest(url: url)
+        webView.loadRequest(request)
         header.conteinerView.addSubview(webView)
-        //header.imageView.image = UIImage(named: "hell-ninja-scorpion-mortal")
+        
         
         favoriteButton = UIButton(type: .custom)
         favoriteButton.frame = CGRect(x: header.conteinerView.frame.width-64, y: header.conteinerView.frame.height-22, width: 44, height: 44)
