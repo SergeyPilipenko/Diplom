@@ -19,8 +19,11 @@
 		846DF2CC1E63755E00F41FD6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DF2CB1E63755E00F41FD6 /* MapViewController.swift */; };
 		846DF2D01E6375C600F41FD6 /* MapHTMLCode.html in Resources */ = {isa = PBXBuildFile; fileRef = 846DF2CF1E6375C600F41FD6 /* MapHTMLCode.html */; };
 		847617331E6B2C35005A18D7 /* CinemaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847617321E6B2C35005A18D7 /* CinemaTableViewController.swift */; };
+		847CD0271E805CCE001EA52F /* FilterLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CD0261E805CCE001EA52F /* FilterLauncher.swift */; };
+		847CD0291E806736001EA52F /* FilterLauncherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847CD0281E806736001EA52F /* FilterLauncherCell.swift */; };
 		84A1E7E11E65BC2E00DBFCF8 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1E7E01E65BC2E00DBFCF8 /* CustomCollectionViewCell.swift */; };
 		84A1E7E31E65DC5100DBFCF8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A1E7E21E65DC5100DBFCF8 /* MapKit.framework */; };
+		84A676231E7EF9E700C012D4 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A676221E7EF9E700C012D4 /* MenuBar.swift */; };
 		84BACFA01E71A8BF00A59734 /* Cinema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BACF9F1E71A8BF00A59734 /* Cinema.swift */; };
 		84BACFA21E71AFB800A59734 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BACFA11E71AFB800A59734 /* City.swift */; };
 		B67C2DF1DAB68CF1EE395530 /* Pods_DiplomMagistratura.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06D98807CA39D1B87CB63699 /* Pods_DiplomMagistratura.framework */; };
@@ -45,8 +48,11 @@
 		846DF2CB1E63755E00F41FD6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		846DF2CF1E6375C600F41FD6 /* MapHTMLCode.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MapHTMLCode.html; sourceTree = "<group>"; };
 		847617321E6B2C35005A18D7 /* CinemaTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CinemaTableViewController.swift; sourceTree = "<group>"; };
+		847CD0261E805CCE001EA52F /* FilterLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterLauncher.swift; sourceTree = "<group>"; };
+		847CD0281E806736001EA52F /* FilterLauncherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterLauncherCell.swift; sourceTree = "<group>"; };
 		84A1E7E01E65BC2E00DBFCF8 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		84A1E7E21E65DC5100DBFCF8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		84A676221E7EF9E700C012D4 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		84BACF9F1E71A8BF00A59734 /* Cinema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cinema.swift; sourceTree = "<group>"; };
 		84BACFA11E71AFB800A59734 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +139,9 @@
 				84A1E7E01E65BC2E00DBFCF8 /* CustomCollectionViewCell.swift */,
 				8417769F1E6B654A00AE6997 /* CustomTableViewCell.swift */,
 				842F19481E7D6CF200E52395 /* FilmCollectionViewCell.swift */,
+				84A676221E7EF9E700C012D4 /* MenuBar.swift */,
+				847CD0261E805CCE001EA52F /* FilterLauncher.swift */,
+				847CD0281E806736001EA52F /* FilterLauncherCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -291,6 +300,8 @@
 			files = (
 				842F19471E7D634D00E52395 /* FilmsCollectionViewController.swift in Sources */,
 				8417769D1E6B35C400AE6997 /* StretchHeader.swift in Sources */,
+				84A676231E7EF9E700C012D4 /* MenuBar.swift in Sources */,
+				847CD0271E805CCE001EA52F /* FilterLauncher.swift in Sources */,
 				846DF2BA1E63712600F41FD6 /* AppDelegate.swift in Sources */,
 				841776A01E6B654A00AE6997 /* CustomTableViewCell.swift in Sources */,
 				84BACFA01E71A8BF00A59734 /* Cinema.swift in Sources */,
@@ -298,6 +309,7 @@
 				847617331E6B2C35005A18D7 /* CinemaTableViewController.swift in Sources */,
 				84BACFA21E71AFB800A59734 /* City.swift in Sources */,
 				84A1E7E11E65BC2E00DBFCF8 /* CustomCollectionViewCell.swift in Sources */,
+				847CD0291E806736001EA52F /* FilterLauncherCell.swift in Sources */,
 				842F19491E7D6CF200E52395 /* FilmCollectionViewCell.swift in Sources */,
 				8417769E1E6B35C400AE6997 /* StretchHeaderOptions.swift in Sources */,
 			);

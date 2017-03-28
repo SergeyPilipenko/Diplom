@@ -9,7 +9,7 @@
 import UIKit
 
 
-class FilmsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class FilmsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +20,63 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
         // Register cell classes
         self.collectionView!.register(FilmCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         
-        navigationItem.title = "Films"
+        self.collectionView?.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
+        self.collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
+        setupSearchBar()
+        setupMenuBar()
+        setupNavigationBar()
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func setupNavigationBar(){
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.hidesBarsOnSwipe = true
+        
+        let filterImage = UIImage(named: "navi_back_btn")
+        let filterBarButtonItem = UIBarButtonItem(image: filterImage, style: .plain, target: self, action: #selector(handleFilter))
+        navigationItem.rightBarButtonItems = [filterBarButtonItem]
+    }
+    
+
+    let filterLauncher = Filterlauncher()
+    
+    func handleFilter() {
+        
+          filterLauncher.showLauncher()
+    }
+    
+ 
+    
+    let menuBar: MenuBar = {
+        let mb = MenuBar()
+        return mb
+    }()
+    
+    private func setupMenuBar(){
+        
+        let whiteView = UIView()
+        whiteView.backgroundColor = .white
+        view.addSubview(whiteView)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: whiteView)
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: whiteView)
+        
+        view.addSubview(menuBar)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: menuBar)
+        
+        menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+
+    }
+    
+    func setupSearchBar() {
+        let searchBar = UISearchBar()
+       // searchBar.showsCancelButton = false
+        searchBar.placeholder = "Введите название фильма"
+        searchBar.delegate = self
+        searchBar.searchBarStyle = .minimal
+        self.navigationItem.titleView = searchBar
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +110,8 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
+        let height = (view.frame.width - 16 - 16) * 9 / 16
+        return CGSize(width: view.frame.width, height: height + 77)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
