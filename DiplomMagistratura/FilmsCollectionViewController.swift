@@ -11,6 +11,7 @@ import UIKit
 
 class FilmsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
+    let cellId = "Cell"
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,10 +19,7 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
         // self.clearsSelectionOnViewWillAppear = false
        
         // Register cell classes
-        self.collectionView!.register(FilmCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        
-        self.collectionView?.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
-        self.collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
+        setupCollectionView()
         setupSearchBar()
         setupMenuBar()
         setupNavigationBar()
@@ -29,9 +27,26 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
         // Do any additional setup after loading the view.
     }
     
+    func setupCollectionView(){
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 0
+        }
+        
+        //self.collectionView!.register(FilmCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        self.collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        self.collectionView?.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
+        self.collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
+        self.collectionView?.isPagingEnabled = true
+        self.collectionView?.showsHorizontalScrollIndicator = false
+        self.collectionView?.bounces = false
+    }
+    
     func setupNavigationBar(){
+        
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.hidesBarsOnSwipe = true
+        navigationController?.hidesBarsOnTap = false
         
         let filterImage = UIImage(named: "navi_back_btn")
         let filterBarButtonItem = UIBarButtonItem(image: filterImage, style: .plain, target: self, action: #selector(handleFilter))
@@ -48,8 +63,9 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
     
  
     
-    let menuBar: MenuBar = {
+    lazy var menuBar: MenuBar = {
         let mb = MenuBar()
+        mb.homeController = self
         return mb
     }()
     
@@ -78,12 +94,43 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
         self.navigationItem.titleView = searchBar
         
     }
+    
+    func scrollToMenuIndex(index: Int){
+        let indexPath = IndexPath(item: index, section: 0)
+        collectionView?.scrollToItem(at: indexPath, at: [], animated: true)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        
+        let arr: [UIColor] = [.blue, .green, .purple, .red]
+        
+        cell.backgroundColor = arr[indexPath.item]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: view.frame.height)
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 4
+    }
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let target = targetContentOffset.pointee.x / view.frame.width
+        let indexPath = IndexPath(item: Int(target), section: 0)
+        menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -97,7 +144,7 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
     // MARK: UICollectionViewDataSource
 
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  /*  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return 5
     }
@@ -116,7 +163,7 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
-    }
+    }*/
     // MARK: UICollectionViewDelegate
 
     /*

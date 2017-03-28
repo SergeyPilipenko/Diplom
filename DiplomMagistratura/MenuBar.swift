@@ -12,6 +12,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
 
     let cellId = "cellId"
     let arr = ["СЕГОДНЯ","ЗАВТРА","ПОСЛЕЗАВТРА","СКОРО"]
+    var homeController: FilmsCollectionViewController?
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -43,6 +44,8 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let x = CGFloat(indexPath.item) * frame.width / 4
         horizontalBarLeftAnchorConstraint?.constant = x
+        
+        homeController?.scrollToMenuIndex(index: indexPath.item)
 
     }
     
