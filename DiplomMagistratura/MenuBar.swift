@@ -62,7 +62,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         
         horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
-        horizontalBarView.heightAnchor.constraint(equalToConstant: 4).isActive = true
+        horizontalBarView.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
     
     override init(frame: CGRect) {
@@ -81,6 +81,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 
 class MenuCell: BaseCell {
     
@@ -108,7 +109,8 @@ class MenuCell: BaseCell {
     }
     
     override func setupViews(){
-    
+        backgroundColor = .white
+        
         addSubview(titleLabel)
         addSubview(subtitleLabel)
         

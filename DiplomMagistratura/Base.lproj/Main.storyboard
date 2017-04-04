@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,7 +19,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Введите название кинотеатра" translatesAutoresizingMaskIntoConstraints="NO" id="8rf-WR-8bb">
@@ -100,30 +101,44 @@
             </objects>
             <point key="canvasLocation" x="1789" y="-472"/>
         </scene>
-        <!--Cinema Table View Controller-->
-        <scene sceneID="xmP-Lg-jHf">
+        <!--View Controller-->
+        <scene sceneID="vNv-NH-k6k">
             <objects>
-                <viewController storyboardIdentifier="cinemaVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ktQ-bG-Ex3" customClass="CinemaTableViewController" customModule="DiplomMagistratura" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0Pa-dN-uFg" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qqf-9H-Og7"/>
-                        <viewControllerLayoutGuide type="bottom" id="8ya-1E-u82"/>
+                        <viewControllerLayoutGuide type="top" id="FfS-LN-h1k"/>
+                        <viewControllerLayoutGuide type="bottom" id="aan-al-QIn"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="p6C-ZD-SnF">
+                    <view key="view" contentMode="scaleToFill" id="Ag5-fM-sv2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dfgdfsgdsfgdgdgsdgdsgf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rc9-zL-ajE">
+                                <rect key="frame" x="111" y="103" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Rc9-zL-ajE" secondAttribute="trailing" constant="151" id="ASX-cQ-5ut"/>
+                            <constraint firstItem="Rc9-zL-ajE" firstAttribute="top" secondItem="FfS-LN-h1k" secondAttribute="bottom" constant="83" id="CuF-e8-FKh"/>
+                            <constraint firstItem="aan-al-QIn" firstAttribute="top" secondItem="Rc9-zL-ajE" secondAttribute="bottom" constant="444" id="FVU-Ia-TR0"/>
+                            <constraint firstItem="Rc9-zL-ajE" firstAttribute="leading" secondItem="Ag5-fM-sv2" secondAttribute="leadingMargin" constant="95" id="ROO-oE-i9P"/>
+                        </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5NP-lH-9Qu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KVA-pR-tbt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2584" y="-472"/>
+            <point key="canvasLocation" x="2528" y="-475"/>
         </scene>
         <!--Films-->
         <scene sceneID="30s-n2-zLj">
             <objects>
                 <collectionViewController id="kAb-Kb-HIU" customClass="FilmsCollectionViewController" customModule="DiplomMagistratura" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="yes-1P-2Li">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9aX-5U-gJa">
@@ -176,7 +191,7 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="IbY-mr-PrS" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="dsT-oJ-GtV">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="dsT-oJ-GtV">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

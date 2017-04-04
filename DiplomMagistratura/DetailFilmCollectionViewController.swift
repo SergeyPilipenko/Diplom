@@ -1,51 +1,40 @@
 //
-//  CinemaTableViewController.swift
+//  DetailFilmCollectionViewController.swift
 //  DiplomMagistratura
 //
-//  Created by Admin on 04.03.17.
+//  Created by Admin on 29.03.17.
 //  Copyright © 2017 SergeyPilipenko. All rights reserved.
 //
 
 import UIKit
-import Alamofire
 
+private let reuseIdentifier = "Cell"
 
-import UIKit
+class DetailFilmCollectionViewController: UICollectionViewController {
 
-class CinemaTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    var cinema: Cinema?
-    var header : StretchHeader!
-    var tableView : UITableView!
     var navigationView = UIView()
     var favoriteButton : UIButton!
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+    var header : StretchHeader!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil;
-          favoriteButton.setTitleColor(isFavorite ? UIColor.red : UIColor.lightGray, for: UIControlState())
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.collectionView?.backgroundColor = .green
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Register cell classes
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+
+        // Do any additional setup after loading the view.
         
-        tableView = UITableView(frame: view.bounds, style: .grouped)
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.bounces = false
-        tableView.allowsSelection = false
-        tableView.separatorStyle = .none
-        view.addSubview(tableView)
-        
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "cell")
-        setupHeaderView()
-        
-        // NavigationHeader
         let navibarHeight : CGFloat = navigationController!.navigationBar.bounds.height
         let statusbarHeight : CGFloat = UIApplication.shared.statusBarFrame.size.height
         navigationView = UIView()
@@ -57,7 +46,7 @@ class CinemaTableViewController: UIViewController, UITableViewDataSource, UITabl
         // I will add this (navigationbar titlelabel)
         let label = UILabel()
         label.frame = CGRect(x: 0, y: statusbarHeight, width: view.frame.size.width, height: navibarHeight)
-        label.text = cinema?.name
+        label.text = "Tratata"
         label.textAlignment = .center
         label.textColor = UIColor.green
         navigationView.addSubview(label)
@@ -69,8 +58,6 @@ class CinemaTableViewController: UIViewController, UITableViewDataSource, UITabl
         backButton.tintColor = UIColor.green
         backButton.addTarget(self, action: #selector(CinemaTableViewController.leftButtonAction), for: .touchUpInside)
         view.addSubview(backButton)
-        
-        
     }
     
     func setupHeaderView() {
@@ -104,7 +91,6 @@ class CinemaTableViewController: UIViewController, UITableViewDataSource, UITabl
         favoriteButton.addTarget(self, action: #selector(addFavorite), for: .touchUpInside)
         header.addSubview(favoriteButton)
         
-        tableView.tableHeaderView  = header
     }
     
     var isFavorite = false
@@ -119,8 +105,8 @@ class CinemaTableViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     // MARK: - ScrollView Delegate
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        header.updateScrollViewOffset(scrollView)
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+       // header.updateScrollViewOffset(scrollView)
         
         // NavigationHeader alpha update
         let offset : CGFloat = scrollView.contentOffset.y
@@ -133,48 +119,87 @@ class CinemaTableViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    // MARK: - Table view data source
-    func numberOfSections(in tableView: UITableView) -> Int {
+     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        
+        switch kind {
+            
+        case UICollectionElementKindSectionHeader:
+            
+            var headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath as IndexPath)
+            
+            
+            return headerView
+            
+        default:
+            
+            assert(false, "Unexpected element kind")
+        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using [segue destinationViewController].
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+    // MARK: UICollectionViewDataSource
+
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
-        cell.label.text = String(describing: indexPath.row)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(section)
-    }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 15))
-        view.backgroundColor = UIColor.white
-        let label = UILabel()
-        label.frame = view.frame
-        label.text = String(section)
-        label.textColor = UIColor.orange
-        label.textAlignment = .center
-        view.addSubview(label)
-        return view
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15
-    }
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
-        view.backgroundColor = UIColor.white
-        return view
+
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of items
+        return 0
     }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
+        // Configure the cell
+    
+        return cell
+    }
+
+    // MARK: UICollectionViewDelegate
+
+    /*
+    // Uncomment this method to specify if the specified item should be highlighted during tracking
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    */
+
+    /*
+    // Uncomment this method to specify if the specified item should be selected
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    */
+
+    /*
+    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        return false
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+    
+    }
+    */
+
 }

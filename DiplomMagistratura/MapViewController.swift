@@ -48,13 +48,15 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             print("not ok")
         }
         
-       // print(Realm.Configuration.defaultConfiguration.fileURL)
+        print(Realm.Configuration.defaultConfiguration.fileURL)
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         // Do any additional setup after loading the view.
     }
 
-
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
+    }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
@@ -78,8 +80,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let cinema = data[indexPath.row]
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-         let cinemaVC = sb.instantiateViewController(withIdentifier: "cinemaVC") as! CinemaTableViewController
+        let cinemaVC = CinemaDetailViewController()
         cinemaVC.cinema = cinema
          navigationController?.pushViewController(cinemaVC, animated: true)
 
