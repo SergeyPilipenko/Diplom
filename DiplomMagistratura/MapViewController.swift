@@ -48,7 +48,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
             print("not ok")
         }
         
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+        //print(Realm.Configuration.defaultConfiguration.fileURL)
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         // Do any additional setup after loading the view.
@@ -87,31 +87,5 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
        
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-  //  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     //   if segue.identifier == "showCinemaDetail"{
-       //    let cell = collectionView.cellForItem(at: selectedIndexPath!) as! CustomCollectionViewCell
-        //    let destinaationVC = segue.destination as! CinemaViewController
-          //  destinaationVC.headerString = cell.label.text
-      //  }
-        
-      //  let sb = UIStoryboard(name: "Main", bundle: nil)
-       // let cinemaVC = sb.instantiateViewController(withIdentifier: "cinemaVC") as! CinemaViewController
-       // cinemaVC.headerString = cell.label.text
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
- //   }
- 
-    
-  
 
 }

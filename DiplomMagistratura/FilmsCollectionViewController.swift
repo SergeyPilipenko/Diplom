@@ -99,7 +99,8 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
     
     // MARK: SearchBar functions
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-         searchBar.setShowsCancelButton(true, animated: true)
+        searchBar.setShowsCancelButton(true, animated: true)
+        
         navigationItem.setRightBarButtonItems([], animated: true)
     }
     

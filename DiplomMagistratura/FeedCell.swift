@@ -11,6 +11,7 @@ import UIKit
 class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var homeController: FilmsCollectionViewController?
+    var anotherHC: CinemaDetailViewController?
 
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -51,16 +52,17 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
      return 0
      }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      //  let layout = UICollectionViewFlowLayout()
-        //let cv = DetailFilmCollectionViewController(collectionViewLayout: layout)
-        //homeController?.navigationController?.pushViewController(cv, animated: true)
+        let cv = FilmDetailViewController()
+        homeController?.navigationController?.pushViewController(cv, animated: true)
+        
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let offset : CGFloat = scrollView.contentOffset.y
         
-        UIView.animate(withDuration: 2.0) {
+        UIView.animate(withDuration: 4.0) {
             if (offset > 50) {
                     self.homeController?.navigationController?.setNavigationBarHidden(true, animated: true)
             } else {
@@ -68,7 +70,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
             }
 
         }
-        
     }
+    
 }
 
