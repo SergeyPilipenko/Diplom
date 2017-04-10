@@ -30,14 +30,20 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Realm.Configuration.defaultConfiguration.schemaVersion = 1
+       /* Make migration
+         
+         Realm.Configuration.defaultConfiguration.schemaVersion = 1
+        
        
 
         
-
-        let realm = try! Realm()
-        data = realm.objects(Cinema.self)
-        print(data.description)
+let url = URL(string: "/Users/admin/Desktop/DiplomMagistratura/DiplomMagistratura/base.realm")!
+        let realm = try! Realm(fileURL: url)
+        print(realm.configuration.encryptionKey?.description)
+        
+ 
+        data = realm.objects(Cinema.self)*/
+        //print(data.description)
         
        
           if let path =  Bundle.main.path(forResource: "MapHTMLCode", ofType: "html") {
@@ -50,8 +56,7 @@ class MapViewController: UIViewController, UICollectionViewDelegate, UICollectio
         
         //print(Realm.Configuration.defaultConfiguration.fileURL)
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        // Do any additional setup after loading the view.
+       
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle{

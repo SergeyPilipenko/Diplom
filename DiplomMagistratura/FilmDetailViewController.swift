@@ -11,12 +11,14 @@ import AVKit
 import AVFoundation
 import Alamofire
 import SwiftyJSON
+import Foundation
 
 class FilmDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
     // MARK: - Constants and variables
+    var film: Film?
     var cinema: Cinema?
-    var titlesArray = ["Адрес:", "Сайт:", "Автоответчик:", "Заказ билетов:"]
+    var titlesArray = ["Страна:", "Год:", "Премьера РФ:", "Студия:", "Жанр:", "Описание:"]
     var detailDictionary: [Int: String] = Dictionary()
     var imagesArray: [String] = Array()
     var isFavorite = false
@@ -30,6 +32,7 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
     
     let cellId = "cellId"
     let filmsCellId = "filmCellId"
+    let filmDescrCellId = "filmDescrCellId"
     
     // MARK: - Support functions
     func setupTableView() {
@@ -39,11 +42,11 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
         tableView.dataSource = self
         tableView.delegate = self
         tableView.bounces = false
-        // tableView.allowsSelection = false
         tableView.estimatedRowHeight = 20
         view.addSubview(tableView)
-        tableView.register(CinemaDescriptionCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(DescriptionCell.self, forCellReuseIdentifier: cellId)
         tableView.register(CinemaFilmsCell.self, forCellReuseIdentifier: filmsCellId)
+        tableView.register(FilmDescriptionCell.self, forCellReuseIdentifier: filmDescrCellId)
     }
     
     func setupNavigationView(){
@@ -60,7 +63,7 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
         // I will add this (navigationbar titlelabel)
         let label = UILabel()
         label.frame = CGRect(x: 0, y: statusbarHeight, width: view.frame.size.width, height: navibarHeight)
-        label.text = "kino"
+        label.text = film?.title
         label.textAlignment = .center
         label.textColor = UIColor.green
         navigationView.addSubview(label)
@@ -102,8 +105,8 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
         header.addSubview(imageView)
         
         pageControl = UIPageControl()
-        pageControl.frame = CGRect(x: imageView.frame.width / 2 - 10, y: imageView.frame.height - 12, width: 10, height: 5)
-        pageControl.numberOfPages = imagesArray.count
+        pageControl.frame = CGRect(x: imageView.frame.origin.x + 50, y: imageView.frame.height - 12, width: 10, height: 5)
+        pageControl.numberOfPages = 5
         pageControl.currentPage = currentPage
         
         imageView.addSubview(pageControl)
@@ -142,8 +145,6 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
                 default:
                     break
             }
-        imageView.image = UIImage(named: imagesArray[currentPage])
-           pageControl.currentPage = currentPage
         
     }
     
@@ -177,28 +178,12 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(string: "http://getmovie.cc/api/kinopoisk.json?id=843789&token=037313259a17be837be3bd04a51bf678")!
-        
-        Alamofire.request(url).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                
-              self.imagesArray = json["screen_film"].arrayValue.map({$0["preview"].stringValue})
-                print("JSON: \(json)")
-                
-                print(self.imagesArray.description)
-                self.pageControl.numberOfPages = self.imagesArray.count
-            case .failure(let error):
-                print(error)
-            }
-        }
+        detailDictionary = createDictionaryForDetailDescription(strings: film?.country, film?.year, film?.premier, film?.studio, film?.genres, film?.story)
         
         setupTableView()
         setupHeaderView()
         setupNavigationView()
         
-        print(imagesArray.count)
         
     }
     
@@ -233,27 +218,67 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CinemaDescriptionCell
-            cell.titleLabel.text = titlesArray[indexPath.row]
-            cell.detaillabel.text = detailDictionary[indexPath.row]
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: filmsCellId, for: indexPath) as! CinemaFilmsCell
-            return cell
+            if indexPath.row == titlesArray.count - 1{
+                let cell = tableView.dequeueReusableCell(withIdentifier: filmDescrCellId, for: indexPath) as! FilmDescriptionCell
+                cell.titleLabel.text = titlesArray[indexPath.row]
+                cell.detaillabel.text = detailDictionary[indexPath.row]
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! DescriptionCell
+                cell.titleLabel.text = titlesArray[indexPath.row]
+                cell.detaillabel.text = detailDictionary[indexPath.row]
+                return cell
+            }
         }
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: filmsCellId, for: indexPath) as! CinemaFilmsCell
+        return cell
     }
+    
+    
+   let selectedCellIndexPath = IndexPath(row: 5, section: 0)
+    var isExpandedCell = false
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        tableView.beginUpdates()
+        if indexPath == selectedCellIndexPath {
+            
+            let cell = tableView.cellForRow(at: indexPath) as! FilmDescriptionCell
+            
+            if isExpandedCell == false {
+                isExpandedCell = true
+                cell.symbolLabel.text = "\u{02C6}"
+            } else {
+                isExpandedCell = false
+                cell.symbolLabel.text = "\u{02C7}"
+            }
+        
+        }
+        
+        tableView.endUpdates()
+        
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
+        
         if indexPath.section == 0 {
+            if indexPath == selectedCellIndexPath {
+                if isExpandedCell {
+                    return UITableViewAutomaticDimension
+                } else {
+                    return 30
+                }
+            }
             return UITableViewAutomaticDimension
         } else {
             return (view.frame.height - 16)
         }
+
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

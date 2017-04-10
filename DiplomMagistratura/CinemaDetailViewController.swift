@@ -37,7 +37,7 @@ class CinemaDetailViewController: UIViewController, UITableViewDataSource, UITab
        // tableView.allowsSelection = false
         tableView.estimatedRowHeight = 20
         view.addSubview(tableView)
-        tableView.register(CinemaDescriptionCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(DescriptionCell.self, forCellReuseIdentifier: cellId)
         tableView.register(CinemaFilmsCell.self, forCellReuseIdentifier: filmsCellId)
     }
     
@@ -80,7 +80,8 @@ class CinemaDetailViewController: UIViewController, UITableViewDataSource, UITab
         webView.isUserInteractionEnabled = false
         webView.scalesPageToFit = true
         
-        let url = URL(string: "https://static-maps.yandex.ru/1.x/?l=map&ll=39.204365,51.661937&z=16&size=500,400&pt=39.204365,51.661937,pm2dgm")!
+       // let url = URL(string: "https://static-maps.yandex.ru/1.x/?l=map&ll=39.204365,51.661937&z=16&size=500,400&pt=39.204365,51.661937,pm2dgm")!
+        let url = URL(string: "https://static-maps.yandex.ru/1.x/?l=map&z=16&size=500,400&pt=39.204365,51.661937,pm2dgm")!
         let request = URLRequest(url: url)
         webView.loadRequest(request)
         header.addSubview(webView)
@@ -160,7 +161,7 @@ class CinemaDetailViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CinemaDescriptionCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! DescriptionCell
             cell.titleLabel.text = titlesArray[indexPath.row]
             cell.detaillabel.text = detailDictionary[indexPath.row]
             return cell
@@ -219,7 +220,5 @@ class CinemaDetailViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
-
-    
-    
+ 
 }

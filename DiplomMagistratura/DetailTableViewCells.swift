@@ -36,9 +36,8 @@ class BaseTableViewCell: UITableViewCell {
 
 }
 
-class CinemaDescriptionCell: BaseTableViewCell {
-
-    
+class DescriptionCell: BaseTableViewCell {
+ 
     let titleLabel: UILabel = {
         let lb = UILabel()
         lb.text = "Автоответчик:"
@@ -67,10 +66,66 @@ class CinemaDescriptionCell: BaseTableViewCell {
         addConstraintsWithFormat(format: "V:|-5-[v0]-5-|", views: titleLabel)
         
         addConstraintsWithFormat(format: "V:|-5-[v0]-5-|", views: detaillabel)
-        addConstraint(NSLayoutConstraint(item: detaillabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1, constant: 10))
+        addConstraint(NSLayoutConstraint(item: detaillabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1, constant: 7))
         addConstraint(NSLayoutConstraint(item: detaillabel, attribute: .leading, relatedBy: .equal, toItem: titleLabel, attribute: .trailingMargin, multiplier: 1, constant: 20))
         
     }
+}
+
+class FilmDescriptionCell: BaseTableViewCell {
+    
+    let titleLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "Автоответчик:"
+        lb.font = UIFont.boldSystemFont(ofSize: 15)
+        lb.textAlignment = .left
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        return lb
+    }()
+    
+    let symbolLabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "\u{02C7}"
+        lb.textAlignment = .left
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        lb.textColor = UIColor.lightGray
+        lb.font = UIFont(name: lb.font.fontName, size: 25)
+        return lb
+    }()
+    
+    let detaillabel: UILabel = {
+        let lb = UILabel()
+        lb.text = "8-800-200-3fffhhhffdfsdfgdfgdfsg00"
+        lb.textAlignment = .left
+        lb.font = UIFont(name: lb.font.fontName, size: 14)
+        lb.numberOfLines = 0
+        lb.translatesAutoresizingMaskIntoConstraints = false
+        return lb
+    }()
+    
+    
+    override func configureCell() {
+        
+        addSubview(titleLabel)
+        addSubview(symbolLabel)
+        addSubview(detaillabel)
+        
+        addConstraintsWithFormat(format: "H:|-10-[v0(115)]", views: titleLabel)
+        addConstraintsWithFormat(format: "V:|-5-[v0(15)]-[v1]-5-|", views: titleLabel, detaillabel)
+        
+        addConstraintsWithFormat(format: "H:[v0(15)]-10-|", views: symbolLabel)
+        addConstraintsWithFormat(format: "V:|-8-[v0(30)]", views: symbolLabel)
+        
+        addConstraint(NSLayoutConstraint(item: detaillabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailingMargin, multiplier: 1, constant: 5))
+        addConstraint(NSLayoutConstraint(item: detaillabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leadingMargin, multiplier: 1, constant: 10))
+    }
+    
+    override var isSelected: Bool{
+        didSet{
+            backgroundColor = isSelected ? UIColor.brown : UIColor.white
+        }
+    }
+    
 }
 
 class CinemaFilmsCell: BaseTableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

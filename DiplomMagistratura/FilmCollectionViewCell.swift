@@ -30,7 +30,7 @@ class FilmCollectionViewCell: BaseCell {
     
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "hell-ninja-scorpion-mortal")
+        //imageView.image = UIImage(named: "843789")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
@@ -54,17 +54,22 @@ class FilmCollectionViewCell: BaseCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Mazafaka"
+        label.textAlignment = .center
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let subtitleTextView: UITextView = {
-        let textView = UITextView()
-        textView.isEditable = false
-        textView.text = "dsgvdfgdfgdfgdgdgdfgdgdfdgfdhfhfhfdhdfhfshgfhfghfsghfhgdgdsgg"
+    let subtitleTextView: UILabel = {
+        let textView = UILabel()
+        //extView.isEditable = false
+        //textView.isScrollEnabled = true
         textView.textColor = UIColor.lightGray
-        textView.textContainerInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
+        textView.textAlignment = .center
+        textView.numberOfLines = 0
+        textView.font = textView.font.withSize(11)
+       
+        
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
@@ -72,18 +77,19 @@ class FilmCollectionViewCell: BaseCell {
     override func setupViews(){
         addSubview(thumbnailImageView)
         addSubview(separatorView)
-        addSubview(ratingLabel)
+       // addSubview(ratingLabel)
         addSubview(titleLabel)
         addSubview(subtitleTextView)
     
         addConstraintsWithFormat(format: "H:|-16-[v0]-16-|", views: thumbnailImageView)
-        addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, ratingLabel, separatorView)
-        addConstraintsWithFormat(format: "H:|-16-[v0(44)]", views: ratingLabel)
+        //addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, ratingLabel, separatorView)
+        addConstraintsWithFormat(format: "V:|-16-[v0]-68-[v1(1)]|", views: thumbnailImageView, separatorView)
+       // addConstraintsWithFormat(format: "H:|-16-[v0(44)]", views: ratingLabel)
        addConstraintsWithFormat(format: "H:|[v0]|", views: separatorView)
        
         addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: thumbnailImageView, attribute: .bottom, multiplier: 1, constant: 8))
         
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: ratingLabel, attribute: .right, multiplier: 1, constant: 8))
+        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: thumbnailImageView, attribute: .left, multiplier: 1, constant: 0))
         
          addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
         
@@ -91,7 +97,7 @@ class FilmCollectionViewCell: BaseCell {
       
         addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 4))
         
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .left, relatedBy: .equal, toItem: ratingLabel, attribute: .right, multiplier: 1, constant: 8))
+        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .left, relatedBy: .equal, toItem: titleLabel, attribute: .left, multiplier: 1, constant: 8))
         
         addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
         
@@ -99,17 +105,4 @@ class FilmCollectionViewCell: BaseCell {
     }
 }
 
-extension UIView{
-    
-    func addConstraintsWithFormat(format: String, views: UIView...){
-        
-        var viewsDictionary = [String: UIView]()
-        for(index, view) in views.enumerated(){
-            let key = "v\(index)"
-            view.translatesAutoresizingMaskIntoConstraints = false
-            viewsDictionary[key] = view
-        }
-        
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
-    }
-}
+

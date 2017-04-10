@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         
-        <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+        <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU&coordorder=longlat" type="text/javascript"></script>
         <style>
             body, html {
                 padding: 0;
@@ -25,7 +25,7 @@
                 myMap = new ymaps.Map('map', {
                 // При инициализации карты обязательно нужно указать
                 // её центр и коэффициент масштабирования.
-                    center: [56.326944, 44.0075], // Нижний Новгород
+                    center: [39.204365,51.661937], // Нижний Новгород
                     zoom: 12,
                     controls: []
                 });

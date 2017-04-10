@@ -7,18 +7,26 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 
 class FilmsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     // MARK: --Variables
-    let cellId = "Cell"
+    let todayCellId = "todayCellId"
+    let tomorrowCellId = "tomorrowCellId"
+    let afterTomorrowCellId = "afterTomorrowCellId"
+    let soonCellId = "soonCellId"
+    
     let filterLauncher = Filterlauncher()
     lazy var menuBar: MenuBar = {
         let mb = MenuBar()
         mb.homeController = self
         return mb
     }()
+    
+    
     
     lazy var filterBarButtonItem: UIBarButtonItem = {
         let filterImage = UIImage(named: "navi_back_btn")
@@ -37,7 +45,11 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
             flowLayout.scrollDirection = .horizontal
             flowLayout.minimumLineSpacing = 0
         }
-        self.collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+        self.collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: todayCellId)
+        self.collectionView?.register(TomorrowFeedCell.self, forCellWithReuseIdentifier: tomorrowCellId)
+        self.collectionView?.register(AfterTomorrowFeedCell.self, forCellWithReuseIdentifier: afterTomorrowCellId)
+        self.collectionView?.register(SoonFeedCell.self, forCellWithReuseIdentifier: soonCellId)
+        
         self.collectionView?.contentInset = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
         self.collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 44, left: 0, bottom: 0, right: 0)
         self.collectionView?.isPagingEnabled = true
@@ -51,11 +63,11 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
     }
     
     func setupMenuBar(){
-        let whiteView = UIView()
-        whiteView.backgroundColor = .white
-        view.addSubview(whiteView)
-        view.addConstraintsWithFormat(format: "H:|[v0]|", views: whiteView)
-        view.addConstraintsWithFormat(format: "V:[v0(44)]", views: whiteView)
+       // let whiteView = UIView()
+        //whiteView.backgroundColor = .white
+        //view.addSubview(whiteView)
+        //view.addConstraintsWithFormat(format: "H:|[v0]|", views: whiteView)
+        //view.addConstraintsWithFormat(format: "V:[v0(44)]", views: whiteView)
         view.addSubview(menuBar)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
         view.addConstraintsWithFormat(format: "V:[v0(44)]", views: menuBar)
@@ -85,6 +97,7 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
 
+                
         setupCollectionView()
         setupSearchBar()
         setupMenuBar()
@@ -95,6 +108,7 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        
     }
     
     // MARK: SearchBar functions
@@ -118,7 +132,22 @@ class FilmsCollectionViewController: UICollectionViewController, UICollectionVie
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FeedCell
+        
+        var identifier = ""
+        
+        switch indexPath.row {
+        case 0:
+            identifier = todayCellId
+        case 1:
+            identifier = tomorrowCellId
+        case 2:
+            identifier = afterTomorrowCellId
+        case 3:
+            identifier = soonCellId
+        default:
+            break
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! FeedCell
         cell.homeController = self
         return cell
     }

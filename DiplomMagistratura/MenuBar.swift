@@ -13,6 +13,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     let cellId = "cellId"
     let arr = ["СЕГОДНЯ","ЗАВТРА","ПОСЛЕЗАВТРА","СКОРО"]
     var homeController: FilmsCollectionViewController?
+    var arrOfDates: [String] = Array()
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -30,6 +31,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
         
         cell.titleLabel.text = arr[indexPath.row]
+        cell.subtitleLabel.text = arrOfDates[indexPath.row]
         return cell
     }
     
@@ -72,6 +74,18 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
         
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        let tomrrowDate = Calendar.current.date(byAdding: .day, value: 1, to: date)
+        print(tomrrowDate!)
+        let afterTomorrowDate = Calendar.current.date(byAdding: .day, value: 2, to: date)
+
+        arrOfDates.append(formatter.string(from: date))
+        arrOfDates.append(formatter.string(from: tomrrowDate!))
+        arrOfDates.append(formatter.string(from: afterTomorrowDate!))
+        arrOfDates.append("")
+        
         let selectedIndexPath = NSIndexPath(item: 0, section: 0)
         collectionView.selectItem(at: selectedIndexPath as IndexPath, animated: false, scrollPosition: [])
         setupHorizontalBar()
@@ -94,7 +108,7 @@ class MenuCell: BaseCell {
     
     let subtitleLabel: UILabel = {
         let lb = UILabel()
-        lb.text = "27.01.2017"
+        //lb.text = "27.01.2017"
         lb.textAlignment = .center
         lb.textColor = UIColor.lightGray
         lb.font = lb.font.withSize(9)
