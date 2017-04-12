@@ -16,10 +16,10 @@ import Foundation
 class FilmDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
     // MARK: - Constants and variables
-    var film: Film?
+    var film = Film()
     var cinema: Cinema?
-    var titlesArray = ["Страна:", "Год:", "Премьера РФ:", "Студия:", "Жанр:", "Описание:"]
-    var detailDictionary: [Int: String] = Dictionary()
+    var titlesArray = ["Страна:", "Год:", "Премьера РФ:", "Студия:", "Жанр:", "Продюссер:", "Сценарист:", "Оператор:", "В ролях:", "Описание:"]
+    var detailArray: [String] = Array()
     var imagesArray: [String] = Array()
     var isFavorite = false
     var currentPage = 0
@@ -29,12 +29,16 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
     var tableView : UITableView!
     var navigationView = UIView()
     var favoriteButton : UIButton!
+    var isExpandedCell = false
+    var isExpandedCellIndexPath: IndexPath?
+    
     
     let cellId = "cellId"
     let filmsCellId = "filmCellId"
     let filmDescrCellId = "filmDescrCellId"
     
     // MARK: - Support functions
+    
     func setupTableView() {
         
         self.automaticallyAdjustsScrollViewInsets = false
@@ -63,7 +67,7 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
         // I will add this (navigationbar titlelabel)
         let label = UILabel()
         label.frame = CGRect(x: 0, y: statusbarHeight, width: view.frame.size.width, height: navibarHeight)
-        label.text = film?.title
+        label.text = film.title
         label.textAlignment = .center
         label.textColor = UIColor.green
         navigationView.addSubview(label)
@@ -86,7 +90,14 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
         
         imageView = UIImageView()
         imageView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width/2)
-       // imageView.image = UIImage(named: imagesArray[currentPage])
+        
+         let urlString = imagesArray[currentPage]
+        Alamofire.request(URL(string: urlString)!).responseData(completionHandler: { (response) in
+                if let data = response.result.value{
+                   self.imageView.image = UIImage(data: data)
+                }
+            })
+
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
@@ -105,8 +116,8 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
         header.addSubview(imageView)
         
         pageControl = UIPageControl()
-        pageControl.frame = CGRect(x: imageView.frame.origin.x + 50, y: imageView.frame.height - 12, width: 10, height: 5)
-        pageControl.numberOfPages = 5
+        pageControl.frame = CGRect(x:0, y: imageView.frame.height - 12, width: imageView.frame.width - 5, height: 5)
+        pageControl.numberOfPages = imagesArray.count
         pageControl.currentPage = currentPage
         
         imageView.addSubview(pageControl)
@@ -131,14 +142,14 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
     func swipeHandler(recognizer: UISwipeGestureRecognizer){
             switch recognizer.direction {
                 case UISwipeGestureRecognizerDirection.left:
-                    if currentPage == imagesArray.count {
+                    if currentPage == imagesArray.count - 1 {
                         currentPage = 0
                     } else {
                         currentPage += 1
                     }
                 case UISwipeGestureRecognizerDirection.right:
                     if currentPage == 0 {
-                        currentPage = imagesArray.count
+                        currentPage = imagesArray.count - 1
                     } else {
                     currentPage -= 1
                     }
@@ -146,18 +157,30 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
                     break
             }
         
+        if !imagesArray[currentPage].contains("trailer"){
+            let urlString = imagesArray[currentPage]
+            Alamofire.request(URL(string: urlString)!).responseData(completionHandler: { (response) in
+                if let data = response.result.value{
+                    self.imageView.image = UIImage(data: data)
+                }
+            })
+        } else{
+            imageView.image = UIImage(named: imagesArray[currentPage])
+        }
+            pageControl.currentPage = currentPage
+        
     }
     
     func tapHandler(){
        print("tap")
-        if currentPage == imagesArray.count {
-            let videoURL = URL(string: "https://kp.cdn.yandex.net/843789/kinopoisk.ru-Ghost-in-the-Shell-322151.mp4")
+       if imagesArray[currentPage].contains("trailer") {
+            let videoURL = URL(string: film.trailer!)
             let player = AVPlayer(url: videoURL!)
             let playerViewController = AVPlayerViewController()
             playerViewController.player = player
-            self.present(playerViewController, animated: true) {
-                playerViewController.player!.play()
-            }
+        self.present(playerViewController, animated: true){
+            playerViewController.player?.play()
+        }
         }
     }
     
@@ -178,7 +201,47 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        detailDictionary = createDictionaryForDetailDescription(strings: film?.country, film?.year, film?.premier, film?.studio, film?.genres, film?.story)
+        let objects: (titArr: Array, detArr: Array) = createDictionaryForDetailDescription(titles: titlesArray, strings: film.country, film.year, film.premier, film.studio, film.genres, film.producers, film.writers, film.operators, film.actors, film.story)
+        
+        titlesArray = objects.titArr
+        detailArray = objects.detArr
+        
+       /* print("=======Titles")
+        print(titlesArray.description)
+        print("======Titles")
+        print(detailArray.description)*/
+        
+        print(film.description)
+        
+        
+        if titlesArray.contains("Описание:") {
+            isExpandedCellIndexPath = IndexPath(row: titlesArray.count - 1, section: 0)
+        }
+        
+        if let screens = film.screens {
+         
+            if !screens.isEmpty {
+            
+                for (_, value) in screens.enumerated() {
+                    let str: String = value
+                    imagesArray.append(str)
+                }
+            } else {
+               imagesArray.append(String(describing: film.bigPoster!))
+            }
+            
+        } else {
+            imagesArray.append(String(describing: film.bigPoster!))
+        }
+        
+        if let trailer = film.trailer {
+            if !trailer.isEmpty{
+                imagesArray.append("trailer")
+            }
+        }
+        
+       // print(imagesArray.description)
+        //print(film.description)
         
         setupTableView()
         setupHeaderView()
@@ -218,37 +281,36 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            if indexPath.row == titlesArray.count - 1{
+            if titlesArray[indexPath.row].contains("Описание:"){
                 let cell = tableView.dequeueReusableCell(withIdentifier: filmDescrCellId, for: indexPath) as! FilmDescriptionCell
                 cell.titleLabel.text = titlesArray[indexPath.row]
-                cell.detaillabel.text = detailDictionary[indexPath.row]
+                cell.detaillabel.text = detailArray[indexPath.row]
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! DescriptionCell
                 cell.titleLabel.text = titlesArray[indexPath.row]
-                cell.detaillabel.text = detailDictionary[indexPath.row]
+                cell.detaillabel.text = detailArray[indexPath.row]
                 return cell
             }
         }
+        
+       
         
         let cell = tableView.dequeueReusableCell(withIdentifier: filmsCellId, for: indexPath) as! CinemaFilmsCell
         return cell
     }
     
-    
-   let selectedCellIndexPath = IndexPath(row: 5, section: 0)
-    var isExpandedCell = false
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
-        tableView.beginUpdates()
-        if indexPath == selectedCellIndexPath {
+        
+        if let ip = isExpandedCellIndexPath {
             
             let cell = tableView.cellForRow(at: indexPath) as! FilmDescriptionCell
-            
-            if isExpandedCell == false {
+            if ip == indexPath{
+                if isExpandedCell == false {
                 isExpandedCell = true
                 cell.symbolLabel.text = "\u{02C6}"
             } else {
@@ -256,8 +318,9 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
                 cell.symbolLabel.text = "\u{02C7}"
             }
         
+            }
         }
-        
+        tableView.beginUpdates()
         tableView.endUpdates()
         
         
@@ -267,12 +330,13 @@ class FilmDetailViewController: UIViewController, UITableViewDataSource, UITable
         
         
         if indexPath.section == 0 {
-            if indexPath == selectedCellIndexPath {
-                if isExpandedCell {
-                    return UITableViewAutomaticDimension
-                } else {
-                    return 30
-                }
+            if let ip = isExpandedCellIndexPath, ip == indexPath{
+                    if isExpandedCell {
+                        return UITableViewAutomaticDimension
+                    } else {
+                        return 30
+                    }
+
             }
             return UITableViewAutomaticDimension
         } else {

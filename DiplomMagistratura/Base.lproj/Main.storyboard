@@ -153,6 +153,35 @@
             </objects>
             <point key="canvasLocation" x="923" y="398"/>
         </scene>
+        <!--Other-->
+        <scene sceneID="eS8-Uz-gNx">
+            <objects>
+                <tableViewController id="aZB-rR-Ug5" customClass="OtherTableViewController" customModule="DiplomMagistratura" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="L5I-Mk-Esd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="z6V-6y-84T">
+                                <rect key="frame" x="0.0" y="56" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z6V-6y-84T" id="sws-nU-do6">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="aZB-rR-Ug5" id="WOG-yv-B9S"/>
+                            <outlet property="delegate" destination="aZB-rR-Ug5" id="r8e-PL-rdG"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Other" id="bvS-1z-xEv"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="diy-5F-1qm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="129" y="1141"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ZVd-Vm-swH">
             <objects>
@@ -166,6 +195,7 @@
                     <connections>
                         <segue destination="gDQ-0I-TPv" kind="relationship" relationship="viewControllers" id="tcG-lt-0dh"/>
                         <segue destination="jtW-CM-VT5" kind="relationship" relationship="viewControllers" id="gXx-x1-Nrq"/>
+                        <segue destination="aZB-rR-Ug5" kind="relationship" relationship="viewControllers" id="OrF-g2-hwg"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Mc-1L-krn" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -27,17 +27,41 @@ extension UIView{
 
 extension NSObject {
     
-    func createDictionaryForDetailDescription(strings: String?...) -> Dictionary<Int, String>{
+    func createDictionaryForDetailDescription(titles: Array<String>, strings: Any?...) -> (Array<String>, Array<String>){
         
-        var dict = [Int: String]()
-        for(index, str) in strings.enumerated() {
-            if let s = str{
-                dict[index] = s
-            } else {
-                dict[index] = ""
+        var finalTitles = Array<String>()
+        var finalDetails = Array<String>()
+        
+        for(index, value) in strings.enumerated() {
+            if let s = value as? String{
+                if !s.isEmpty {
+                    finalDetails.append(s)
+                    finalTitles.append(titles[index])
+                }
+               
+            }  else if let arr = value as? Array<String> {
+                if !arr.isEmpty{
+                    var str = ""
+                    if arr.count > 3{
+                        for index in 1...3 {
+                          str += "\(arr[index]), "
+                        }
+                    } else {
+                        for (_, value) in arr.enumerated(){
+                            str += "\(value), "
+                        }
+  
+                    }
+                    
+                    let endIndex = str.index(str.endIndex, offsetBy: -2)
+                    var truncated = str.substring(to: endIndex)
+                    
+                    finalDetails.append(truncated)
+                    finalTitles.append(titles[index])
+                }
             }
         }
-        
-        return dict
+     return (finalTitles, finalDetails)
     }
 }
+

@@ -20,31 +20,33 @@ class Film: NSObject {
     var bigPoster: String?
     var smallPoster: String?
     var story: String?
-    var actors: Array<Any>?
-    var producers:  Array<Any>?
-    var writers:  Array<Any>?
-    var operators:  Array<Any>?
-    var screens:  Array<Any>?
+    var actors: Array<String>?
+    var producers:  Array<String>?
+    var writers:  Array<String>?
+    var operators:  Array<String>?
+    var screens:  Array<String>?
+    
+    
     
     override var description: String{
         let str = ""
         print("=========")
         print(id)
         print(title)
-        print(premier)
-        print(year)
-        print(country)
-        print(genres)
-        print(studio)
-        print(trailer)
         print(bigPoster)
         print(smallPoster)
-        print(story)
-        print(actors?.description)
+        print(trailer)
+        print(screens?.description)
+        print(country)
+        print(year)
+        print(premier)
+        print(studio)
+        print(genres)
         print(producers?.description)
         print(writers?.description)
         print(operators?.description)
-        print(screens?.description)
+        print(actors?.description)
+        print(story)
         print("=========")
         return str
     }

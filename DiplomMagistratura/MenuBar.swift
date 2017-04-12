@@ -78,7 +78,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         let tomrrowDate = Calendar.current.date(byAdding: .day, value: 1, to: date)
-        print(tomrrowDate!)
+        //print(tomrrowDate!)
         let afterTomorrowDate = Calendar.current.date(byAdding: .day, value: 2, to: date)
 
         arrOfDates.append(formatter.string(from: date))

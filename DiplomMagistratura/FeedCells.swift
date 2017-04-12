@@ -92,7 +92,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
      }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cv = FilmDetailViewController()
-        cv.film = films?[indexPath.row]
+        cv.film = (films?[indexPath.row])!
         homeController?.navigationController?.pushViewController(cv, animated: true)
         
         
